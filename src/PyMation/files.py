@@ -2,7 +2,7 @@ import os
 
 from itertools import permutations
 
-class file():
+class Pfile():
     def __init__(self, filename, path):
         self.filename = filename
         self.path = path
