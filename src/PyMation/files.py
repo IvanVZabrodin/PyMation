@@ -1,12 +1,11 @@
 import os
 
-from itertools import permutations
-
 class Pfile():
     def __init__(self, filename, path):
         self.filename = filename
         self.path = path
         self.fullpath = path + "\\" + filename
+        
 
     def load(self):
         with open(self.fullpath, "r") as f:
@@ -28,17 +27,17 @@ class Pfile():
         for arg in args:
             with open(self.fullpath, "r+") as f:
                 l = f.readlines()
-            l.insert(arg[1], str(arg[0]))
+            l.insert(arg[1], str(arg[0]) + "\n")
             with open(self.fullpath, "w") as fw:
                 fw.writelines(l)
 
     def clear(self, *lines: int):
-        for line in lines:
-            with open(self.fullpath, "r+") as f:
-                l = f.readlines()
-            l[line] = "\n"
-            with open(self.fullpath, "w") as fw:
-                fw.writelines(l)
+        with open(self.fullpath, "r+") as f:
+            l = f.readlines()
+            for line in lines:
+                l[line] = ""
+        with open(self.fullpath, "w") as fw:
+            fw.writelines(l)
     
     def delete(self):
         os.remove(self.fullpath)
