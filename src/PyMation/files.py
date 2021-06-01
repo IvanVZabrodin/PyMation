@@ -5,9 +5,14 @@ class Pfile():
         self.filename = filename
         self.path = path
         self.fullpath = path + "\\" + filename
-        
+        try:
+            with open(self.fullpath, "r") as f:
+                pass
+        except FileNotFoundError:
+            with open(self.fullpath, "w") as f:
+                pass
 
-    def load(self):
+    def load(self) -> list:
         with open(self.fullpath, "r") as f:
             return f.readlines()
 
